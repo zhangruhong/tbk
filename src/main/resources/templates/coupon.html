@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:prg="http://thymeleafexamples">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>淘宝客</title>
+
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/css/bootstrapv3.css}"></link>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrapv3.js}"></script>
+<script th:src="@{/js/bootstrap-paginator.js}"></script>
+</head>
+<body>
+
+	<div id="tbk_header" style="width: 85%; margin: 0 auto">
+		<th:block th:include="_menu :: div"> default</th:block>
+	</div>
+
+	<div id="tbk_main" style="width: 80%; margin: 0 auto">
+		<div class="list-group"></div>
+
+		<div class="container">
+			<div class="row">
+				<div th:each="itme,itemStat : ${coupons}">
+					<div class="col-lg-3">
+						<a th:href="${itme.couponClickUrl}" class="list-group-item">
+							<h4 class="list-group-item-heading" th:text="${itme.title}">入门网站包</h4>
+							<img th:src="${itme.pictUrl}" style="width: 220px; height: 220px" />
+							<!-- 优惠券信息 --> <span th:text="${itme.couponInfo}"
+							style="font-size: large; color: red;"></span> <span
+							th:text="'活动时间：' + ${itme.couponStartTime} + '至' + ${itme.couponEndTime}"></span>
+						</a> <br />
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div style="width: 80%; margin: 0 auto" id="tbk_pagebar">
+		<div id="pageInitValue" style="display: none;" th:text="${pageInfos}"></div>
+		<ul id='bp-3-element-test' style="cursor: hand;"></ul>
+	</div>
+
+
+	<script>
+		$(function() {
+			var element = $('#bp-3-element-test');//获得数据装配的位置
+			var pageInitValue = $('#pageInitValue').text();
+			var pageAttr = pageInitValue.split(',');
+		
+			alert(pageInitValue);
+			//初始化所需数据
+			var options = {
+				bootstrapMajorVersion : 3,//版本号。3代表的是第三版本
+				currentPage : pageAttr[1], //当前页数
+				numberOfPages : 20, //显示页码数标个数
+				//totalPages : pageAttr[0], //总共的数据所需要的总页数
+				totalPages : 21, //总共的数据所需要的总页数
+				
+				tooltipTitles : function(type, page, current) {
+					//如果想要去掉页码数字上面的预览功能，则在此操作。例如：可以直接return。
+					switch (type) {
+					case "first":
+						return "Go to first page";
+					case "prev":
+						return "Go to previous page";
+					case "next":
+						return "Go to next page";
+					case "last":
+						return "Go to last page";
+					case "page":
+						return (page === current) ? "Current page is " + page
+								: "Go to page " + page;
+					}
+				},
+				onPageClicked : function(e, originalEvent, type, page) {
+					//单击当前页码触发的事件。若需要与后台发生交互事件可在此通过ajax操作。page为目标页数。
+					//console.log(e);
+					//console.log(originalEvent);
+					// console.log(type);
+					alert(page);
+					location.href = "/coupon?pageNum=" + page ;
+				}
+			};
+			element.bootstrapPaginator(options); //进行初始化
+		});
+	</script>
+
+</body>
+</html>

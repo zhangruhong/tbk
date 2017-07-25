@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:prg="http://thymeleafexamples">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>淘宝客</title>
+
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"></link>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+p {
+	margin: 0;
+	width: 98%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.product-price-tips {
+	margin-top: 10px;
+	margin-left: 8px;
+	font-size: small;
+}
+
+.price-tips {
+	margin-top: 10px;
+	margin-left: 8px;
+}
+
+.price-tip_pro-txt {
+	padding: 2px 4px 2px 12px;
+	letter-spacing: 1px;
+	color: #555;
+}
+
+.float-left {
+	float: left !important;
+}
+
+.product-price .price-current {
+	color: #ff464e;
+	font-size: 25pt;
+}
+
+.price-current em {
+	font-size: 12pt;
+	font-style: normal;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+.product-price-tips i {
+	padding-left: 1px;
+	padding-right: 1px;
+	font-style: normal;
+}
+</style>
+</head>
+<body>
+
+	<div id="tbk_header" style="width: 85%; margin: 0 auto">
+		<th:block th:include="_menu :: div"> default</th:block>
+	</div>
+
+	<div id="tbk_main" style="width: 90%; margin: 0 auto">
+		<div class="list-group"></div>
+
+		<div class="container">
+			<div class="row">
+				<div th:each="hot,itemStat : ${hots}">
+
+					<div class="col-lg-3">
+						<div class="list-group-item">
+							<a th:href="${hot.pcUrl}">
+								<h4 class="list-group-item-heading" th:text="${hot.categoryName}"></h4>
+								<img th:src="${hot.picUrlForPC}"
+								style="width: 220px; height: 220px" />
+							</a>
+							<!-- 价格 -->
+							<div class="product-price clearfix">
+								<div class="float-left price-current">
+									<em>￥</em><span th:text="${hot.actPrice}"></span>
+								</div>
+								<div class="float-left product-price-tips">
+									<span class="glyphicon glyphicon-arrow-left">聚划算</span><br />
+									<span class="price-tip-sales"><del
+											th:text="${hot.origPrice}"></del></span>
+								</div>
+
+							</div>
+							<p>
+								<a th:text="${hot.itemUspList}" href="#" th:title="${hot.itemUspList}"></a>
+							</p>
+						</div>
+						<br />
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div id="tbk_page" style="width: 85%; margin: 0 auto">
+		<ul class="pagination pagination-lg">
+			<li><a href="#">&laquo;</a></li>
+			<li class="active"><a href="#">1</a></li>
+			<li class="disabled"><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">&raquo;</a></li>
+		</ul>
+	</div>
+
+
+	<script>
+		
+	</script>
+
+</body>
+</html>
