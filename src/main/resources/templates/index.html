@@ -10,9 +10,12 @@
 <link
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/css/bootstrapv3.css}"></link>
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{/js/bootstrapv3.js}"></script>
+<script th:src="@{/js/bootstrap-paginator.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <style type="text/css">
 p {
@@ -66,8 +69,9 @@ p {
 </style>
 </head>
 <body>
-
+	<div id="h_url" style="display: none;" th:text="${h_url}"></div>
 	<div id="tbk_header" style="width: 85%; margin: 0 auto">
+		
 		<th:block th:include="_menu :: div"> default</th:block>
 	</div>
 
@@ -108,26 +112,12 @@ p {
 				</div>
 			</div>
 		</div>
-
-
 	</div>
 
-	<div id="tbk_page" style="width: 85%; margin: 0 auto">
-		<ul class="pagination pagination-lg">
-			<li><a href="#">&laquo;</a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li class="disabled"><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">&raquo;</a></li>
-		</ul>
+	<div style="width: 80%; margin: 0 auto" id="tbk_pagebar">
+		<div id="pageInitValue" style="display: none;" th:text="${pageInfos}"></div>
+		<ul id='bp-3-element-test' style="cursor: hand;"></ul>
 	</div>
-
-
-	<script>
-		
-	</script>
 
 </body>
 </html>

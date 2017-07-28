@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.bukaxi.tbk.constant.Constants;
 import com.bukaxi.tbk.domain.CouponInfo;
+import com.bukaxi.tbk.domain.IndexInfo;
 import com.bukaxi.tbk.service.TbkApiService;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
@@ -20,14 +21,17 @@ import com.taobao.api.response.TbkItemGetResponse;
 public class TbkApiServiceImpl implements TbkApiService {
 
 	@Override
-	public TbkItemGetResponse getTbkItems(String type) {
+	public TbkItemGetResponse getTbkItems(String type, IndexInfo index) {
 		TaobaoClient client = new DefaultTaobaoClient(" http://gw.api.taobao.com/router/rest", Constants.APP_KEY,
 				Constants.SECRET);
 		TbkItemGetRequest req = new TbkItemGetRequest();
 		req.setFields(
 				"num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
 		req.setQ(type);
-		req.setPageSize(20L);
+		req.setPageSize(Long.valueOf(index.getPageSize()));
+//		req.setPageSize(20L);
+//		req.setPageNo(13l);
+		req.setPageNo(Long.valueOf(index.getPageNum()));
 		TbkItemGetResponse response = null;
 		try {
 			response = client.execute(req);
