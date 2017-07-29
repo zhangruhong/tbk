@@ -8,7 +8,7 @@ import com.taobao.api.response.TbkItemGetResponse;
 
 public interface TbkApiService {
 	
-	TbkItemGetResponse getTbkItems(String type, IndexInfo index);
+	TbkItemGetResponse getTbkItems(IndexInfo index);
 	
 	//好券清单
 	TbkDgItemCouponGetResponse geTbkDgItemCoupons(CouponInfo coupon);

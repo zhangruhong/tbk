@@ -25,6 +25,5 @@ public class IndexInfo extends PageInfo<IndexInfo> {
 	public void setSearchMsg(String searchMsg) {
 		this.searchMsg = searchMsg;
 	}
-
 	
 }

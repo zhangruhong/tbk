@@ -1,9 +1,10 @@
 $(function() {
 	page.init();
 	$('#searchBtn').click(function() {
+		var url = $("#h_url").text();
 		var searchVal = $('#searchVal').val();
 		// alert('searchVal:' + searchVal);
-		location.href = "/item/" + searchVal + "?searchMsg=" + searchVal;
+		location.href = "/" + url + "?searchMsg=" + searchVal;
 	});
 
 });
@@ -26,19 +27,19 @@ var page = {
 			currentPage : pageAttr[1], // 当前页数
 			numberOfPages : 20, // 显示页码数标个数
 			// totalPages : pageAttr[0], //总共的数据所需要的总页数
-			totalPages : pageAttr[0], // 总共的数据所需要的总页数
+			totalPages : parseInt(pageAttr[0]) < parseInt(pageAttr[1]) ? pageAttr[1] : pageAttr[0] , // 总共的数据所需要的总页数
 
 			tooltipTitles : function(type, page, current) {
 				// 如果想要去掉页码数字上面的预览功能，则在此操作。例如：可以直接return。
 				switch (type) {
 				case "first":
-					return "Go to first page";
+					return "首页";
 				case "prev":
-					return "Go to previous page";
+					return "前一页";
 				case "next":
-					return "Go to next page";
+					return "下一页";
 				case "last":
-					return "Go to last page";
+					return "尾页";
 				case "page":
 					return (page === current) ? "Current page is " + page
 							: "Go to page " + page;
@@ -49,7 +50,7 @@ var page = {
 				// console.log(e);
 				// console.log(originalEvent);
 				// console.log(type);				
-				location.href = "/" + url + "?pageNum=" + page + "&searchVal=" + searchVal;
+				location.href = "/" + url + "?searchMsg=" + searchVal + "&pageNum=" + page;
 			}
 		};
 		element.bootstrapPaginator(options); // 进行初始化

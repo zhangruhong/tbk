@@ -21,13 +21,16 @@ import com.taobao.api.response.TbkItemGetResponse;
 public class TbkApiServiceImpl implements TbkApiService {
 
 	@Override
-	public TbkItemGetResponse getTbkItems(String type, IndexInfo index) {
+	public TbkItemGetResponse getTbkItems(IndexInfo index) {
 		TaobaoClient client = new DefaultTaobaoClient(" http://gw.api.taobao.com/router/rest", Constants.APP_KEY,
 				Constants.SECRET);
 		TbkItemGetRequest req = new TbkItemGetRequest();
 		req.setFields(
 				"num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
-		req.setQ(type);
+		if(index.getSearchMsg() == null || "".equals(index.getSearchMsg())){
+			index.setSearchMsg("零食");
+		}
+		req.setQ(index.getSearchMsg());
 		req.setPageSize(Long.valueOf(index.getPageSize()));
 //		req.setPageSize(20L);
 //		req.setPageNo(13l);
@@ -39,13 +42,6 @@ public class TbkApiServiceImpl implements TbkApiService {
 		} catch (ApiException e) {
 			e.printStackTrace();
 		}
-		// List<NTbkItem> list = response.getResults();
-		// list.forEach( l -> {
-		// System.out.println(l.getClickUrl());
-		// });
-
-		// Long total = response.getTotalResults();
-		// System.out.println(total);
 
 		return response;
 	}

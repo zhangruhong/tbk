@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bukaxi.tbk.domain.CouponInfo;
@@ -27,34 +26,33 @@ public class TbkApiController {
 
 	@RequestMapping("/index")
 	public String index(ModelMap map, IndexInfo index) {
-		// 加入一个属性，用来在模板中读取
-		map.addAttribute("host", "http://blog.didispace.com");
 		// return模板文件的名称，对应src/main/resources/templates/index.html
-		TbkItemGetResponse response = tbkApiService.getTbkItems("计算机", index);
+		TbkItemGetResponse response = tbkApiService.getTbkItems( index);
 		List<NTbkItem> list = response.getResults();
-//		map.addAllAttributes(list);
+
 		String pageInfos = response.getTotalResults() + "," + index.getPageNum();
+		map.put("searchMsg", index.getSearchMsg());
 		map.put("pageInfos", pageInfos);
 		map.put("itmes", list);
 		map.put("h_url", "index");
 		return "index";
 	}
 
-	@RequestMapping("/item/{type}")
-	public String item(@PathVariable("type") String type, ModelMap map, IndexInfo index) {
-		// 加入一个属性，用来在模板中读取
-		// map.addAttribute("host", "http://blog.didispace.com");
-		// return模板文件的名称，对应src/main/resources/templates/index.html
-		TbkItemGetResponse response = tbkApiService.getTbkItems(type, index);
-		List<NTbkItem> list = response.getResults();
-		// map.addAllAttributes(list);
-		String pageInfos = list.size() + "," + index.getPageNum();
-		map.put("searchMsg", index.getSearchMsg());
-		map.put("pageInfos", pageInfos);
-		map.put("itmes", list);
-		map.put("h_url", "item");
-		return "index";
-	}
+//	@RequestMapping("/index")
+//	public String item(@PathVariable("type") String type, ModelMap map, IndexInfo index) {
+//		// 加入一个属性，用来在模板中读取
+//		// map.addAttribute("host", "http://blog.didispace.com");
+//		// return模板文件的名称，对应src/main/resources/templates/index.html
+//		TbkItemGetResponse response = tbkApiService.getTbkItems(type, index);
+//		List<NTbkItem> list = response.getResults();
+//		// map.addAllAttributes(list);
+//		String pageInfos = list.size() + "," + index.getPageNum();
+//		map.put("searchMsg", index.getSearchMsg());
+//		map.put("pageInfos", pageInfos);
+//		map.put("itmes", list);
+//		map.put("h_url", "item");
+//		return "index";
+//	}
 
 	@RequestMapping("/coupon")
 	public String coupon(ModelMap map, CouponInfo coupon) {
