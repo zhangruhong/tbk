@@ -16,6 +16,7 @@
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script th:src="@{/js/bootstrapv3.js}"></script>
 <script th:src="@{/js/bootstrap-paginator.js}"></script>
+<script th:src="@{/js/tbk-page.js}"></script>
 <script th:src="@{/js/index.js}"></script>
 <style type="text/css">
 p {
@@ -84,7 +85,7 @@ p {
 
 					<div class="col-lg-3">
 						<div class="list-group-item">
-							<a th:href="${itme.itemUrl}">
+							<a target="blank" th:href="${itme.itemUrl}">
 								<h4 class="list-group-item-heading" th:text="${itme.nick}"></h4>
 								<img th:src="${itme.pictUrl}"
 								style="width: 220px; height: 220px" />

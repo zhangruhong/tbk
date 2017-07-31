@@ -51,11 +51,14 @@ public class TbkApiServiceImpl implements TbkApiService {
 		TaobaoClient client = new DefaultTaobaoClient("http://gw.api.taobao.com/router/rest", Constants.APP_KEY,
 				Constants.SECRET);
 		TbkDgItemCouponGetRequest req = new TbkDgItemCouponGetRequest();
+		if(coupon.getSearchMsg() == null || "".equals(coupon.getSearchMsg())){
+			coupon.setSearchMsg("女装");
+		}
 		req.setAdzoneId(121044559L);
 		req.setPlatform(1L);
 		req.setCat("16,18");
 		req.setPageSize(Long.valueOf(coupon.getPageSize()));
-		req.setQ("女装");
+		req.setQ(coupon.getSearchMsg());
 		req.setPageNo(Long.valueOf(coupon.getPageNum()));
 		TbkDgItemCouponGetResponse rsp = null;
 		try {

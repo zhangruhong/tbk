@@ -61,8 +61,10 @@ public class TbkApiController {
 		List<TbkCoupon> list = response.getResults();
 		map.addAllAttributes(list);
 		map.put("coupons", list);
-		String pageInfos = list.size() / 20 + "," + coupon.getPageNum();
+		String pageInfos = response.getTotalResults() + "," + coupon.getPageNum();
+		map.put("searchMsg", coupon.getSearchMsg());
 		map.put("pageInfos", pageInfos);
+		map.put("h_url", "coupon");
 		return "coupon";
 	}
 
