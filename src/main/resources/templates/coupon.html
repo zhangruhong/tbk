@@ -17,6 +17,7 @@
 <script th:src="@{/js/bootstrapv3.js}"></script>
 <script th:src="@{/js/bootstrap-paginator.js}"></script>
 <script th:src="@{/js/tbk-page.js}"></script>
+<script th:src="@{/js/coupon.js}"></script>
 
 </head>
 <body>
@@ -53,19 +54,6 @@
 		<div id="pageInitValue" style="display: none;" th:text="${pageInfos}"></div>
 		<ul id='bp-3-element-test' style="cursor: hand;"></ul>
 	</div>
-
-
-	<script>
-		$(function() {
-			page.init();
-			$('#searchBtn').click(function() {
-				var url = $("#h_url").text();
-				var searchVal = $('#searchVal').val();
-				// alert('searchVal:' + searchVal);
-				location.href = "/" + url + "?searchMsg=" + searchVal;
-			});
-		});
-	</script>
 
 </body>
 </html>

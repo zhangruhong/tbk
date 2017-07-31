@@ -2,12 +2,12 @@
 	<nav class="navbar navbar-inverse" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">卡希布</a>
+				<a class="navbar-brand" href="#">优惠券专区</a>
 			</div>
 			<div>
 				<!--向左对齐-->
 				<ul class="nav navbar-nav navbar-left">
-					<li class="dropdown"><a class="dropdown-toggle"
+					<!-- <li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 男人天地 <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu">
@@ -54,17 +54,48 @@
 							<li><a th:href="@{'/item/' + '言情'}">言情</a></li>
 							<li><a th:href="@{'/item/' + '武侠'}">武侠</a></li>
 							<li><a th:href="@{'/item/' + '侦探'}">侦探</a></li>
-						</ul></li>
+						</ul></li> -->
 
-					<li class="dropdown"><a th:href="@{'/coupon/'}"
-						class="dropdown-toggle"> 优惠券专区 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '居家'}" class="dropdown-toggle">
+							居家 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '数码'}" class="dropdown-toggle">
+							数码 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '母婴'}" class="dropdown-toggle">
+							母婴 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '零食'}" class="dropdown-toggle">
+							零食 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '女装'}" class="dropdown-toggle">
+							女装 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '女鞋'}" class="dropdown-toggle">
+							女鞋 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '男装'}" class="dropdown-toggle">
+							男装 </a></li>
+
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '家电'}" class="dropdown-toggle">
+							家电 </a></li>
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '箱包'}" class="dropdown-toggle">
+							箱包 </a></li>
+
+					<li class="dropdown"><a
+						th:href="@{'/coupon?searchMsg=' + '箱包'}" class="dropdown-toggle">
+							配饰 </a></li>
+
 					<li class="dropdown"><a th:href="@{'/hot/'}"
 						class="dropdown-toggle"> 聚划算专区 </a></li>
 				</ul>
 				<form class="navbar-form navbar-left" role="search">
 					<div class="input-group">
-						<input id="searchVal" type="text" th:value="${searchMsg}" class="form-control" /> <span
-							class="input-group-btn">
+						<input id="searchVal" type="text" th:value="${searchMsg}"
+							class="form-control" /> <span class="input-group-btn">
 							<button id="searchBtn" class="btn btn-default" type="button">Go!</button>
 						</span>
 					</div>

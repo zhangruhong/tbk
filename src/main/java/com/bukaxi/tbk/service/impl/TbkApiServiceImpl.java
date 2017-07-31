@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.bukaxi.tbk.constant.Constants;
 import com.bukaxi.tbk.domain.CouponInfo;
+import com.bukaxi.tbk.domain.HotInfo;
 import com.bukaxi.tbk.domain.IndexInfo;
 import com.bukaxi.tbk.service.TbkApiService;
 import com.taobao.api.ApiException;
@@ -56,7 +57,7 @@ public class TbkApiServiceImpl implements TbkApiService {
 		}
 		req.setAdzoneId(121044559L);
 		req.setPlatform(1L);
-		req.setCat("16,18");
+//		req.setCat("16,18");
 		req.setPageSize(Long.valueOf(coupon.getPageSize()));
 		req.setQ(coupon.getSearchMsg());
 		req.setPageNo(Long.valueOf(coupon.getPageNum()));
@@ -72,15 +73,16 @@ public class TbkApiServiceImpl implements TbkApiService {
 	}
 
 	@Override
-	public JuItemsSearchResponse getJuItemsSearchRes() {
+	public JuItemsSearchResponse getJuItemsSearchRes(HotInfo hot) {
 		TaobaoClient client = new DefaultTaobaoClient(Constants.URL, Constants.APP_KEY, Constants.SECRET);
 		JuItemsSearchRequest req = new JuItemsSearchRequest();
 		TopItemQuery obj1 = new TopItemQuery();
-		obj1.setCurrentPage(1L);
-		obj1.setPageSize(20L);
+		obj1.setCurrentPage(Long.valueOf(hot.getPageNum()));
+		obj1.setPageSize(Long.valueOf(hot.getPageSize()));
 		obj1.setPid(Constants.PID);
 		obj1.setPostage(true);
 		obj1.setStatus(2L);
+		obj1.setWord(hot.getSearchMsg());
 		// obj1.setTaobaoCategoryId(1000L);
 		// obj1.setWord("test");
 		req.setParamTopItemQuery(obj1);

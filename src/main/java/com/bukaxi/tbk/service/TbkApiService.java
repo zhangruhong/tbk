@@ -1,6 +1,7 @@
 package com.bukaxi.tbk.service;
 
 import com.bukaxi.tbk.domain.CouponInfo;
+import com.bukaxi.tbk.domain.HotInfo;
 import com.bukaxi.tbk.domain.IndexInfo;
 import com.taobao.api.response.JuItemsSearchResponse;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
@@ -14,6 +15,6 @@ public interface TbkApiService {
 	TbkDgItemCouponGetResponse geTbkDgItemCoupons(CouponInfo coupon);
 	
 	//聚划算
-	JuItemsSearchResponse getJuItemsSearchRes();
+	JuItemsSearchResponse getJuItemsSearchRes(HotInfo hot);
 
 }

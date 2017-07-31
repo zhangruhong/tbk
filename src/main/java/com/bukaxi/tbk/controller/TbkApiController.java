@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bukaxi.tbk.domain.CouponInfo;
+import com.bukaxi.tbk.domain.HotInfo;
 import com.bukaxi.tbk.domain.IndexInfo;
 import com.bukaxi.tbk.service.TbkApiService;
 import com.taobao.api.domain.NTbkItem;
@@ -69,12 +70,16 @@ public class TbkApiController {
 	}
 
 	@RequestMapping("/hot")
-	public String hot(ModelMap map) {
+	public String hot(ModelMap map, HotInfo hot) {
 		// return模板文件的名称，对应src/main/resources/templates/index.html
-		JuItemsSearchResponse response = tbkApiService.getJuItemsSearchRes();
+		JuItemsSearchResponse response = tbkApiService.getJuItemsSearchRes(hot);
 		PaginationResult list = response.getResult();
 		List<Items> modelList = list.getModelList();
 		map.put("hots", modelList);
+		String pageInfos = response.getResult().getTotalPage() + "," + hot.getPageNum();
+		map.put("searchMsg", hot.getSearchMsg());
+		map.put("pageInfos", pageInfos);
+		map.put("h_url", "hot");
 		return "hot";
 	}
 
