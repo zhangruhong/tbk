@@ -6,6 +6,7 @@ import com.bukaxi.tbk.domain.IndexInfo;
 import com.taobao.api.response.JuItemsSearchResponse;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkItemGetResponse;
+import com.taobao.api.response.TbkUatmFavoritesItemGetResponse;
 
 public interface TbkApiService {
 	
@@ -16,5 +17,8 @@ public interface TbkApiService {
 	
 	//聚划算
 	JuItemsSearchResponse getJuItemsSearchRes(HotInfo hot);
+	
+	//获取淘宝联盟选品库的宝贝信息
+	TbkUatmFavoritesItemGetResponse getFavorites();
 
 }

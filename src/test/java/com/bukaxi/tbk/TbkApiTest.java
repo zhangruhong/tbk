@@ -66,14 +66,17 @@ public class TbkApiTest {
 		TbkDgItemCouponGetRequest req = new TbkDgItemCouponGetRequest();
 		req.setAdzoneId(Long.valueOf(Constants.ADZONID));
 		req.setPlatform(1L);
-		req.setCat("16,18");
-		req.setPageSize(1L);
+//		req.setCat("16,18");
+//		req.setPageSize(5L);
 		req.setQ("女装");
 		req.setPageNo(1L);
 		TbkDgItemCouponGetResponse rsp = null;
 		rsp = client.execute(req);
 		List<TbkCoupon> l = rsp.getResults();
-		System.out.println("test2:" + rsp.getBody());
+		for(int i=0;i<l.size();i++){
+			System.out.println(i + "," + l.get(i).getNick());
+		}
+		System.out.println("test2:" + l.size() + ",total:" + rsp.getTotalResults());
 		
 	}
 

@@ -14,9 +14,11 @@ import com.taobao.api.request.JuItemsSearchRequest;
 import com.taobao.api.request.JuItemsSearchRequest.TopItemQuery;
 import com.taobao.api.request.TbkDgItemCouponGetRequest;
 import com.taobao.api.request.TbkItemGetRequest;
+import com.taobao.api.request.TbkUatmFavoritesItemGetRequest;
 import com.taobao.api.response.JuItemsSearchResponse;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkItemGetResponse;
+import com.taobao.api.response.TbkUatmFavoritesItemGetResponse;
 
 @Service
 public class TbkApiServiceImpl implements TbkApiService {
@@ -28,13 +30,13 @@ public class TbkApiServiceImpl implements TbkApiService {
 		TbkItemGetRequest req = new TbkItemGetRequest();
 		req.setFields(
 				"num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
-		if(index.getSearchMsg() == null || "".equals(index.getSearchMsg())){
+		if (index.getSearchMsg() == null || "".equals(index.getSearchMsg())) {
 			index.setSearchMsg("零食");
 		}
 		req.setQ(index.getSearchMsg());
 		req.setPageSize(Long.valueOf(index.getPageSize()));
-//		req.setPageSize(20L);
-//		req.setPageNo(13l);
+		// req.setPageSize(20L);
+		// req.setPageNo(13l);
 		req.setPageNo(Long.valueOf(index.getPageNum()));
 		TbkItemGetResponse response = null;
 		try {
@@ -52,12 +54,12 @@ public class TbkApiServiceImpl implements TbkApiService {
 		TaobaoClient client = new DefaultTaobaoClient("http://gw.api.taobao.com/router/rest", Constants.APP_KEY,
 				Constants.SECRET);
 		TbkDgItemCouponGetRequest req = new TbkDgItemCouponGetRequest();
-		if(coupon.getSearchMsg() == null || "".equals(coupon.getSearchMsg())){
+		if (coupon.getSearchMsg() == null || "".equals(coupon.getSearchMsg())) {
 			coupon.setSearchMsg("女装");
 		}
 		req.setAdzoneId(121044559L);
 		req.setPlatform(1L);
-//		req.setCat("16,18");
+		// req.setCat("16,18");
 		req.setPageSize(Long.valueOf(coupon.getPageSize()));
 		req.setQ(coupon.getSearchMsg());
 		req.setPageNo(Long.valueOf(coupon.getPageNum()));
@@ -93,6 +95,29 @@ public class TbkApiServiceImpl implements TbkApiService {
 		} catch (ApiException e) {
 			e.printStackTrace();
 		}
+
+		return rsp;
+	}
+
+	@Override
+	public TbkUatmFavoritesItemGetResponse getFavorites() {
+		TaobaoClient client = new DefaultTaobaoClient(Constants.URL, Constants.APP_KEY, Constants.SECRET);
+		TbkUatmFavoritesItemGetRequest req = new TbkUatmFavoritesItemGetRequest();
+		req.setPlatform(1L);
+		req.setPageSize(20L);
+		req.setAdzoneId(Long.valueOf(Constants.ADZONID));
+		req.setUnid("3456");
+		req.setFavoritesId(10010L);
+		req.setPageNo(2L);
+		req.setFields(
+				"num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick,shop_title,zk_final_price_wap,event_start_time,event_end_time,tk_rate,status,type");
+		TbkUatmFavoritesItemGetResponse rsp = null;
+		try {
+			rsp = client.execute(req);
+		} catch (ApiException e) {
+			e.printStackTrace();
+		}
+		System.out.println(rsp.getBody());
 
 		return rsp;
 	}
