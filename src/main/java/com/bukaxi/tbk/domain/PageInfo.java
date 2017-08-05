@@ -13,7 +13,7 @@ public class PageInfo<T> implements Serializable {
 	private int pageNum = 1;
 	
 	//默认20条
-	private int pageSize = 20;
+	private int pageSize = 40;
 	
 	private int size;
 	
