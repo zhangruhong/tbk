@@ -54,6 +54,20 @@ public class TbkApiController {
 //		map.put("h_url", "item");
 //		return "index";
 //	}
+	
+	@RequestMapping("/")
+	public String home(ModelMap map, CouponInfo coupon) {
+		// return模板文件的名称，对应src/main/resources/templates/index.html
+		TbkDgItemCouponGetResponse response = tbkApiService.geTbkDgItemCoupons(coupon);
+		List<TbkCoupon> list = response.getResults();
+		map.addAllAttributes(list);
+		map.put("coupons", list);
+		String pageInfos = response.getTotalResults() + "," + coupon.getPageNum();
+		map.put("searchMsg", coupon.getSearchMsg());
+		map.put("pageInfos", pageInfos);
+		map.put("h_url", "coupon");
+		return "coupon";
+	}
 
 	@RequestMapping("/coupon")
 	public String coupon(ModelMap map, CouponInfo coupon) {
