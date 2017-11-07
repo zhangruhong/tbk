@@ -32,18 +32,15 @@
 
 		<div class="container">
 			<div class="row">
-				<div th:each="itme,itemStat : ${coupons}">
-					<div class="col-lg-3">
-						<a target="blank" th:href="${itme.couponClickUrl}" class="list-group-item">
-							<h4 class="list-group-item-heading" th:text="${itme.title}">入门网站包</h4>
-							<img th:src="${itme.pictUrl}" style="width: 220px; height: 220px" />
-							<!-- 优惠券信息 --> <span th:text="${itme.couponInfo}"
-							style="font-size: large; color: red;"></span> <span
-							th:text="'活动时间：' + ${itme.couponStartTime} + '至' + ${itme.couponEndTime}"></span>
-						</a> <br />
-					</div>
-
-				</div>
+			
+			<div th:each="map,mapStat : ${map}">
+				<a target="blank" th:href="${map.key}"><span class="price-tip-sales"><del
+											th:text="${map.key}"></del></span></a>
+				<a target="blank" th:href="${map.value}"><span class="price-tip-sales"><del
+											th:text="${map.value}"></del></span></a>
+			</div>
+			
+				
 			</div>
 		</div>
 

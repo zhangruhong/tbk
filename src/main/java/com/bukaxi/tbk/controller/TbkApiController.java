@@ -1,6 +1,8 @@
 package com.bukaxi.tbk.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,7 @@ public class TbkApiController {
 		map.put("pageInfos", pageInfos);
 		map.put("itmes", list);
 		map.put("h_url", "index");
+		
 		return "index";
 	}
 
@@ -66,6 +69,17 @@ public class TbkApiController {
 		map.put("searchMsg", coupon.getSearchMsg());
 		map.put("pageInfos", pageInfos);
 		map.put("h_url", "coupon");
+		
+		
+		//test map
+				Map<String, Long> map2 = new HashMap<>();
+				map2.put("大", 1000l);
+				map2.put("大要", 1230l);
+				map2.put("大要", 1230l);
+				map2.put("sd要", 232l);
+				map.put("map", map2);
+				
+				
 		return "coupon";
 	}
 
