@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bukaxi.tbk.annota.NameScanner;
+
 @Controller
 public class HelloController {
 
@@ -13,6 +15,7 @@ public class HelloController {
 	// }
 
 	@RequestMapping("/hello")
+	@NameScanner
 	public String index(ModelMap map) {
 		// 加入一个属性，用来在模板中读取
 		map.addAttribute("host", "http://blog.didispace.com");
